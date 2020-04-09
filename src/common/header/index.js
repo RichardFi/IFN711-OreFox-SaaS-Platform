@@ -4,8 +4,8 @@ class Header extends Component{
     render() {
         return (
             <HeaderWrapper>
-                <Logo href='/'></Logo>
                 <Nav>
+                    <Logo href='/'></Logo>
                     <NavItem className = 'left active'> Home</NavItem>
                     <NavItem className = 'left'> About us</NavItem>
                     <NavItem className = 'right'> Register</NavItem>

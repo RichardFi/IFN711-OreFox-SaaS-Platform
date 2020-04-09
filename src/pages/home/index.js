@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
 import List from './components/List';
-import { HomeWrapper, HomeLeft, HomeRight } from './style';
+import { HomeWrapper, HomeTop, HomeTopic, Portals, PortalsTxt, PortalsButton } from './style';
 
 class Home extends Component {
     render(){
         return(
-            <HomeWrapper>
-                <HomeLeft>
-                    <img className='banner-img'src="https://www.mining-technology.com/wp-content/uploads/sites/8/2019/03/Fimiston-gold-mine.-Credit-Newmont-Mining.jpg">
-                    </img>
-                    
-                </HomeLeft>
-                <HomeRight>
-                    <List />
-                </HomeRight>
-            </HomeWrapper>
+            <div>
+                <HomeWrapper>
+                    <HomeTop>
+                    </HomeTop>
+                    <HomeTopic>
+                        OreFox SaaS Platform.
+                    </HomeTopic>
+                </HomeWrapper>
+                <Portals>
+                    <PortalsTxt>
+                        Please select one of the following to be redirected to your account portal.
+                    </PortalsTxt>
+                    <PortalsButton className="client">
+                        Client Portal
+                    </PortalsButton>
+                    <PortalsButton className="analyst">
+                        Analyst Portal
+                    </PortalsButton>
+                </Portals>
+            </div>
         )
     }
 }

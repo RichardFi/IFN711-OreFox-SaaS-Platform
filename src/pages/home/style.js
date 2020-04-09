@@ -1,29 +1,56 @@
 import styled from 'styled-components';
 
 export const HomeWrapper = styled.div`
-    overflow: hidden;
-    width: 960px;
+    left: 0;
+    right: 0;
+    height: 500px;
+    top: 71px;
+    background: url(${"https://www.mining-technology.com/wp-content/uploads/sites/8/2019/03/Fimiston-gold-mine.-Credit-Newmont-Mining.jpg"})
+`
+
+export const HomeTop = styled.div`
     margin: 0 auto;
+    padding-top: 180px;
 `
 
-export const HomeLeft = styled.div`
-    float: left;
-    margin-left: 15px;
-    padding-top: 30px;
-    width: 625px;
-    .banner-img{
-        width: 625px;
-        height: 240px;
+export const HomeTopic = styled.div`
+    text-align: center;
+    margin: auto;
+    padding: 24px 12px;
+    width: 600px;
+    border: 1px solid #f0f0f0;
+    background-color: rgba(255,255,255,0.8);
+    font-size: 60px;
+    font-weight: 700;
+    color: rgba(224,103,47,1);
+`
+
+export const Portals = styled.div`
+    left: 0;
+    right: 0;
+    height: 240px;
+    width: 100%;
+    border: 1px solid #f0f0f0;
+`
+
+export const PortalsTxt = styled.div`
+    text-align: center;
+    margin: auto;
+    padding: 60px 12px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #777777;
+`
+
+export const PortalsButton = styled.button`
+    width: 15%;
+    line-height: 40px;
+    &.client{
+        float: left;
+        margin-left: 30%;
     }
-`
-
-export const HomeRight = styled.div`
-    width: 240px;
-    float: right;
-    margin-left: 15px;
-    padding-top: 30px;
-    .des{
-        font-size: 20px;
-        line-height: 30px;
+    &.analyst{
+        float: right;
+        margin-right: 30%;
     }
 `
