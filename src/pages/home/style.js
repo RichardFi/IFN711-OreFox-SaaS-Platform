@@ -28,7 +28,7 @@ export const HomeTopic = styled.div`
 export const Portals = styled.div`
     left: 0;
     right: 0;
-    height: 240px;
+    height: 290px;
     width: 100%;
     border: 1px solid #f0f0f0;
 `
@@ -42,9 +42,15 @@ export const PortalsTxt = styled.div`
     color: #777777;
 `
 
-export const PortalsButton = styled.button`
+export const PortalsButton = styled.div`
+    text-align: center;
     width: 15%;
     line-height: 40px;
+    border-radius: 5px;
+    border: 2px solid #E6732D;
+    font-weight: bold;
+    color: #E6732D;
+    padding: 5px 10px;
     &.client{
         float: left;
         margin-left: 30%;
