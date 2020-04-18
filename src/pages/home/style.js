@@ -59,4 +59,12 @@ export const PortalsButton = styled.div`
         float: right;
         margin-right: 30%;
     }
+    &:hover {
+        color: #fff; 
+        background-color: #E6732D;
+        transition: all .5s;
+        font-size:17px;
+        cursor: pointer;
+     }
+
 `
