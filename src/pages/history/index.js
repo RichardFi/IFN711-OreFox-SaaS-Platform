@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListItem, ListInfo, HistoryWrapper, ListWrapper } from './style';
-
+//import { actionCreators } from './store';
 
 class History extends Component {
     render(){
@@ -25,10 +25,19 @@ class History extends Component {
             </HistoryWrapper>
         )
     }
+    componentDidMount() {
+        this.props.getDetail();
+    }
 }
 
 const mapState = (state) => ({
     list: state.get('history').get('historyList')
 });
 
-export default connect(mapState, null) (History);
+const mapDispatch = (dispatch) => ({
+    getDetail(){
+        
+    }
+})
+
+export default connect(mapState, mapDispatch) (History);
