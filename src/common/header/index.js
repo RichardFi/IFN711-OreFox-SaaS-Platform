@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 //import { constants } from '../../pages/login/store';
 import { actionCreators as loginActionCreators } from '../../pages/login/store';
 
-
 class Header extends Component{
     render() {
         const {login, logout} = this.props;
