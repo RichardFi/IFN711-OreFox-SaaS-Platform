@@ -44,4 +44,14 @@ export const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+    .login-form-button{
+        background-color: #e0672f;
+        border-color: #e0672f;
+        :hover {
+            background-color: rgba(224, 103, 47, 0.8);
+            border-color: rgba(224, 103, 47, 0.8);
+            transition: all .5s;
+            cursor: pointer;
+        }
+    }
 `;

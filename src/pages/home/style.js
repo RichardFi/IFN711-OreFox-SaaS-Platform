@@ -20,7 +20,7 @@ export const HomeTopic = styled.div`
     width: 600px;
     border: 1px solid #f0f0f0;
     background-color: rgba(255,255,255,0.8);
-    font-size: 60px;
+    font-size: 56px;
     font-weight: 700;
     color: rgba(224,103,47,1);
 `

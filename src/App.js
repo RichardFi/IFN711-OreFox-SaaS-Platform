@@ -7,10 +7,10 @@ import Home from './pages/home';
 import Login from './pages/login';
 import History from './pages/history';
 import Profile from './pages/profile';
-
 import { GlobalStyle } from './style.js';
 import { IconFont } from './statics/iconfont/iconfont.js';
 import store from './store';
+
 
 class App extends Component{
   render(){

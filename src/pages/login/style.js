@@ -11,31 +11,24 @@ export const LoginWrapper = styled.div`
 
 export const LoginBox = styled.div`
     width: 400px;
-    height: 180px;
+    height: 270px;
     margin: 80px auto;
     padding-top: 20px;
     background #fff;
     box-shadow: 0 0 8px rgba(0,0,0,.1);
+    .login-form{
+        .ant-form-item{
+            padding: 0 40px;
+        }
+    }
 `
 
-export const Input = styled.input`
+export const LoginHeader = styled.div`
     display: block;
-    width: 200px;
-    height: 30px;
-    margin: 10px auto;
+    text-align:center;
     line-height: 30px;
+    margin-bottom: 30px;
     padding: 0 10px;
-    color: #777;
-`
-
-export const Button = styled.div`
-    width: 220px;
-    height: 30px;
-    margin: 10px auto;
-    line-height: 30px;
-    color: #fff;
-    background: orange;
-    border-radius: 15px;
-    margin: 10px auto;
-    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
 `
