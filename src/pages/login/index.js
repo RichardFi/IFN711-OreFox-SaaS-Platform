@@ -8,6 +8,18 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 class Login extends Component {
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.Form.validateFields((err, values) =>{
+            if (!err){
+                console.log("received", values);
+            } else {
+                console.log('fail');
+            }
+        });
+    }
+    
     render(){
         const { loginStatus } = this.props;
         const onFinish = values => {
@@ -41,7 +53,7 @@ class Login extends Component {
                                 name="password"
                                 rules={[{ required: true, message: 'Please input your Password!' }]}
                             >
-                                <Input
+                                <Input.Password allowClear 
                                 ref={(input) => {this.password = input}}
                                 prefix={<LockOutlined className="site-form-item-icon" />}
                                 type="password"
