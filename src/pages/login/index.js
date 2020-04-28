@@ -6,26 +6,30 @@ import { actionCreators } from './store';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
+//import { reqLogin } from '../../api';
 
 class Login extends Component {
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.props.Form.validateFields((err, values) =>{
-            if (!err){
-                console.log("received", values);
-            } else {
-                console.log('fail');
-            }
-        });
-    }
-    
     render(){
         const { loginStatus } = this.props;
         const onFinish = values => {
             console.log('Received values of form: ', values);
+            this.props.login(values);
           };
-
+/*
+        this.props.form.validateFields(async (err,values) =>{
+            if(!err){
+                const {username, password} = values;
+                const response = await reqLogin(username, password);
+                const result = response.data;
+                if (result.status===0){
+                    console.log('success');
+                } else{
+                    console.erro(result.msg);
+                }
+            }
+        });
+*/
         if(!loginStatus) {
             return(
                 <LoginWrapper>
@@ -63,7 +67,7 @@ class Login extends Component {
 
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" className="login-form-button" 
-                                onClick={() => this.props.login(this.account, this.password)} block="true">
+                                 block="true">
                                     Log in
                                 </Button>
                             </Form.Item>
@@ -82,10 +86,10 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-    login(accountElem, passwordElem){
-        //console.log(accountElem.value, passwordElem.value);
-        //console.log(isPlainObject(actionCreators.login(accountElem.value, passwordElem.value)));    
-        dispatch(actionCreators.login(accountElem.value, passwordElem.value));
+    login(value){
+        //console.log(isPlainObject(actionCreators.login(accountElem.value, passwordElem.value)));
+        console.log(value);
+        dispatch(actionCreators.login(value));
     }
 })
 

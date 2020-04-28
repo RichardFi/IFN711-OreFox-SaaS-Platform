@@ -10,8 +10,6 @@ import Profile from './pages/profile';
 import { GlobalStyle } from './style.js';
 import { IconFont } from './statics/iconfont/iconfont.js';
 import store from './store';
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/');
 
 class App extends Component{
   render(){

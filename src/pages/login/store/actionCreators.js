@@ -1,5 +1,5 @@
-import axios from 'axios';
 import * as constants from './constants';
+import { reqLogin } from '../../../api';
 
 const changeLogin = () => ({
     type: constants.CHANGE_LOGIN,
@@ -11,16 +11,16 @@ export const logout = () => ({
     value: false
 })
 
-export const login = (account, password) => {
-    return (dispatch) => {
-        axios.get('./api/login.json?account=' + account + '&password=' + password)
-        .then((res) => {
-            const result = res.data.data;
-            if (result){
-                dispatch(changeLogin());
-            }else {
-                alert('fail');
-            }
-        })
+export const login = (user) => {
+    return async dispatch => {
+        const response = await reqLogin(user);
+        const result = response.data;
+        console.log('11', user);
+        console.log(result);
+        if (result.code===0){
+            dispatch(changeLogin());
+        }else {
+            alert('fail');
+        }
     }
 }
