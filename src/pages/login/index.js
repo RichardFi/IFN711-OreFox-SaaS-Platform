@@ -16,7 +16,7 @@ class Login extends Component {
         if(user._id) {
             return <Redirect to='/' />
         }
-        const { loginStatus } = this.props;
+        //const { loginStatus } = this.props;
         const onFinish = values => {
             this.props.login(values);
           };

@@ -4,7 +4,7 @@ import logo from '../../statics/logo.png';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import {
-    AppstoreOutlined,
+    //AppstoreOutlined,
     //MenuUnfoldOutlined,
     //MenuFoldOutlined,
     PieChartOutlined,

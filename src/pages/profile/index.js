@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { ProfileWrapper, ProfileBox } from './style';
 import { Form, Input, Button } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+//import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 class Profile extends Component {
     render(){
-        const { loginStatus } = this.props;
+        //const { loginStatus } = this.props;
         const onFinish = values => {
             alert("Success!");
           };
