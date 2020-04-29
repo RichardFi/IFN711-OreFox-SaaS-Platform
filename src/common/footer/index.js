@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { FooterWrapper, FooterNav, FooterLeft, FooterRight, NavItemLeft, NavItemRight } from './style';
 class Footer extends Component{
-    render() {
+    render() {        
+        if(this.props.history.location.pathname==='/home'){
+            return null;
+        }   
         return (
             <FooterWrapper>
                 <FooterNav>

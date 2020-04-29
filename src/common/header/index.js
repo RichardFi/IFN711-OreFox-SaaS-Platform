@@ -8,6 +8,9 @@ import { actionCreators as loginActionCreators } from '../../pages/login/store';
 class Header extends Component{
     render() {
         const {login, logout} = this.props;
+        if(this.props.history.location.pathname==='/home'){
+            return null;
+        }   
         return (
             <HeaderWrapper>
                 <Nav>

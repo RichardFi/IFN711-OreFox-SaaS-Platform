@@ -9,14 +9,15 @@ import 'antd/dist/antd.css';
 //import { reqLogin } from '../../api';
 
 class Login extends Component {
-
     render(){
         const { loginStatus } = this.props;
         const onFinish = values => {
-            console.log('Received values of form: ', values);
             this.props.login(values);
           };
-/*
+          const onFinishFailed = errorInfo => {
+            console.log('Failed:', errorInfo);
+          };
+/*  
         this.props.form.validateFields(async (err,values) =>{
             if(!err){
                 const {username, password} = values;
@@ -40,6 +41,7 @@ class Login extends Component {
                             className="login-form"
                             initialValues={{ remember: true }}
                             onFinish={onFinish}
+                            onFinishFailed={onFinishFailed}
                         >
                             <Form.Item
                                 name="username"
@@ -55,7 +57,12 @@ class Login extends Component {
                             </Form.Item>
                             <Form.Item
                                 name="password"
-                                rules={[{ required: true, message: 'Please input your Password!' }]}
+                                rules={[
+                                    { required: true, message: 'Please input your Password!' },
+                                    { min: 4, message: 'Username must be more than 4 characters!' },
+                                    { max: 12, message: 'Username must be less than 4 characters!' },
+                                    { pattern: /^[a-zA-Z0-9_]+$/, message: 'User name can only consist of numbers, letters or underlines!' }
+                                ]}
                             >
                                 <Input.Password allowClear 
                                 ref={(input) => {this.password = input}}
@@ -76,7 +83,7 @@ class Login extends Component {
                 </LoginWrapper>
             )
         } else{
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/home'></Redirect>
         }
     }
 }
@@ -88,7 +95,6 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
     login(value){
         //console.log(isPlainObject(actionCreators.login(accountElem.value, passwordElem.value)));
-        console.log(value);
         dispatch(actionCreators.login(value));
     }
 })

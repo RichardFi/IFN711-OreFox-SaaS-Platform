@@ -53,5 +53,11 @@ export const GlobalStyle = createGlobalStyle`
             transition: all .5s;
             cursor: pointer;
         }
+        :focus {
+            background-color: #e0672f;
+            border-color: #e0672f;
+            transition: all .5s;
+            cursor: pointer;
+        }
     }
 `;
