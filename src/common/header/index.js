@@ -8,13 +8,19 @@ import { actionCreators as loginActionCreators } from '../../pages/login/store';
 class Header extends Component{
     render() {
         const {login, logout} = this.props;
-        if(this.props.history.location.pathname==='/home'){
+        if(this.props.history.location.pathname==='/'||
+        this.props.history.location.pathname==='/history'||
+        this.props.history.location.pathname==='/support'||
+        this.props.history.location.pathname==='/profile'||
+        this.props.history.location.pathname==='/payment'||
+        this.props.history.location.pathname==='/mainHome'||
+        this.props.history.location.pathname==='/upload'){
             return null;
         }   
         return (
             <HeaderWrapper>
                 <Nav>
-                    <Logo href='/'></Logo>
+                    <Logo href='/marketing'></Logo>
                     <NavItem className = 'left active'> Home</NavItem>
                     <NavItem className = 'left'> About us</NavItem>
                     {

@@ -5,7 +5,7 @@ import { LoginWrapper, LoginBox, LoginHeader } from './style';
 import { actionCreators } from './store';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import storageUtils from '../../utils/memoryUtils';
+//import storageUtils from '../../utils/memoryUtils';
 import 'antd/dist/antd.css';
 import memoryUtils from '../../utils/memoryUtils';
 //import { reqLogin } from '../../api';
@@ -14,7 +14,7 @@ class Login extends Component {
     render(){
         const user = memoryUtils.user;
         if(user._id) {
-            return <Redirect to='/home' />
+            return <Redirect to='/' />
         }
         const { loginStatus } = this.props;
         const onFinish = values => {
@@ -37,7 +37,7 @@ class Login extends Component {
             }
         });
 */
-        if(!loginStatus) {
+        
             return(
                 <LoginWrapper>
                     <LoginBox>
@@ -88,9 +88,7 @@ class Login extends Component {
                     </LoginBox>
                 </LoginWrapper>
             )
-        } else{
-            return <Redirect to='/home'></Redirect>
-        }
+        
     }
 }
 

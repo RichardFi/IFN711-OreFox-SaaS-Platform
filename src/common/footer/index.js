@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { FooterWrapper, FooterNav, FooterLeft, FooterRight, NavItemLeft, NavItemRight } from './style';
 class Footer extends Component{
     render() {        
-        if(this.props.history.location.pathname==='/home'){
+        if(this.props.history.location.pathname==='/' || 
+        this.props.history.location.pathname==='/history'||
+        this.props.history.location.pathname==='/support'||
+        this.props.history.location.pathname==='/profile'||
+        this.props.history.location.pathname==='/payment'||
+        this.props.history.location.pathname==='/mainHome'||
+        this.props.history.location.pathname==='/upload'
+        ){
             return null;
         }   
         return (

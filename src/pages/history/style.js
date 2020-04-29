@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 
 export const HistoryWrapper = styled.div`
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 71px;
-    height: 800px;
-    background: #eee;
 `;
 
 export const ListWrapper = styled.div`

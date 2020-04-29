@@ -10,9 +10,11 @@ export const HeaderWrapper = styled.div`
 export const Logo = styled.a`
     float: left;
     margin-right: 20px;
-    display: inline-block;
-    width: 70px;
-    height: 70px;
+    margin-top : 5px;
+    display: flex;
+    align-items: center;
+    width: 55px;
+    height: 60px;
     background: url(${logoPic});
     background-size: contain;
 `;
