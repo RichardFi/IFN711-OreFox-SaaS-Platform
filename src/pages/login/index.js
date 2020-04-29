@@ -5,11 +5,17 @@ import { LoginWrapper, LoginBox, LoginHeader } from './style';
 import { actionCreators } from './store';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import storageUtils from '../../utils/memoryUtils';
 import 'antd/dist/antd.css';
+import memoryUtils from '../../utils/memoryUtils';
 //import { reqLogin } from '../../api';
 
 class Login extends Component {
     render(){
+        const user = memoryUtils.user;
+        if(user._id) {
+            return <Redirect to='/home' />
+        }
         const { loginStatus } = this.props;
         const onFinish = values => {
             this.props.login(values);

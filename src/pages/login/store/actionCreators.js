@@ -1,6 +1,7 @@
 import * as constants from './constants';
 import { reqLogin } from '../../../api';
-import memoryUtils from "../../utils/memoryUtils";
+import memoryUtils from "../../../utils/memoryUtils";
+import storageUtils from '../../../utils/storageUtils';
 
 const changeLogin = () => ({
     type: constants.CHANGE_LOGIN,
@@ -21,6 +22,8 @@ export const login = (user) => {
         if (result.code===0){
             const user = result.data;
             memoryUtils.user = user;
+            storageUtils.saveUser(user);
+
             dispatch(changeLogin());
         }else {
             alert('fail');
