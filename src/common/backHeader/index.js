@@ -3,6 +3,9 @@ import { HeaderWrap, HeaderTop, HeaderBottom, HeaderBottomLeft, HeaderBottomRigh
 import { Modal } from 'antd';
 import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
+//import { useLocation, 
+    //useHistory, useRouteMatch 
+//} from "react-router";
 
 class BackHeader extends Component {
     logout(){
@@ -15,7 +18,9 @@ class BackHeader extends Component {
             }
         })
     }
+
     render(){
+        //const title = getTitle();
         return(
             <HeaderWrap>
                 <HeaderTop>

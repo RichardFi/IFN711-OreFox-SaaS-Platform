@@ -5,7 +5,7 @@ class mainHome extends Component {
     render(){
         return(
             <div>
-
+                Welcome to OreFox Platform!
             </div>
         )
     }

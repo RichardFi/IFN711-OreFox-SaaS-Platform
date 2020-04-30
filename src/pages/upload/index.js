@@ -5,7 +5,7 @@ class Upload extends Component {
     render(){
         return(
             <div>
-
+                upload page
             </div>
         )
     }

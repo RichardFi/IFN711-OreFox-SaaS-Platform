@@ -11,6 +11,7 @@ import {
     DesktopOutlined,
     ContainerOutlined,
     MailOutlined,
+    HomeOutlined
 } from '@ant-design/icons';
 
 const SubMenu = Menu.SubMenu;
@@ -43,7 +44,7 @@ class LeftNav extends Component {
                 >
                     <Menu.Item key="0">
                         <Link to='/mainHome'>
-                            <PieChartOutlined />
+                            <HomeOutlined />
                             <span>Home</span>
                         </Link>
                     </Menu.Item>
@@ -58,7 +59,7 @@ class LeftNav extends Component {
                     >
                         <Menu.Item key="1"><Link to='/profile'>Profile</Link></Menu.Item>
                         <Menu.Item key="2"><Link to='/payment'>Make payment</Link></Menu.Item>
-                        <Menu.Item key="3">Other</Menu.Item>
+                        
                     </SubMenu>
                     <Menu.Item key="4">
                         <Link to='/upload'>
