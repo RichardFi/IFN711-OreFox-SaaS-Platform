@@ -24,12 +24,12 @@ class BackHeader extends Component {
         return(
             <HeaderWrap>
                 <HeaderTop>
-                    <span>Welcome, user_test</span>
+                    <span>Welcome, {storageUtils.getUser().username}</span>
                     <a href="javacript:" onClick={this.logout}>Logout</a>
                 </HeaderTop>
                 <HeaderBottom>
                     <HeaderBottomLeft>
-                        Home
+                        
                     </HeaderBottomLeft>
                     <HeaderBottomRight>
                         <span></span>

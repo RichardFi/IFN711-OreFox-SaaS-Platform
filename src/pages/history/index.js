@@ -1,52 +1,76 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ListItem, ListInfo, HistoryWrapper, ListWrapper } from './style';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { HistoryWrapper } from './style';
+import { message, List, Space, Select, Button} from 'antd';
+import { CloudDownloadOutlined, StarOutlined } from '@ant-design/icons';
+import storageUtils from '../../utils/storageUtils';
 
-class History extends Component {
-    render(){
-        return(
-            <HistoryWrapper>
-                <ListWrapper>
-                    {
-                        this.props.list.map((item) => {
-                            return (
-                                <ListItem key={item.get('id')}>
-                                    <img className='pic' alt={item.get('alt')} src={item.get('imgUrl')}></img>
-                                    <ListInfo>
-                                        <h3 className='title'>{item.get('title')}</h3>
-                                        <p className='desc'>{item.get('desc')}</p>
-                                    </ListInfo>    
-                                </ListItem>
-                            )
-                        })
-                    }
-                </ListWrapper>
-            </HistoryWrapper>
-        )
-    }
-    componentDidMount() {
-        //this.props.getDetail();
-        axios.get('/api/detail.json').then((res) => {
-            const result = res.data.data;
-            const action = {
-                type: 'change_history_data',
-                historyList: result.historyList
-            }
-            this.props.changeHistoryData(action);
-            console.log(result)
-        })
-    }
+const { Option } = Select;
+
+export default function History() {
+    const [hist, setHist] =useState([]);
+
+    useEffect(
+        () => {
+        fetch("/getHistory", {method: 'POST' })
+        .then(res => res.json())
+        .then(res => setHist(res.data))
+        .catch(e => message.error(`Error`))        
+    },[])
+
+    const AnalyseStatus = ({ icon, text, href }) => (
+        !(storageUtils.getUser().type==="admin") ? <Space style={{ width: 140 }}>{React.createElement(icon)}{text.status}</Space>:     
+        <Select 
+            defaultValue={text.status} 
+            style={{ width: 140 }} 
+            onChange={(value)=>{
+                fetch("/updateStatus", {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({value:value,requirement:text._id}),
+                    })
+                    .then(message.success(`Requirement status update saved!`))
+                    .catch(e => message.error(`Error`))
+            }}
+        >
+            <Option value="To be confirmed">To be confirmed</Option>
+            <Option value="Confirmed">Confirmed</Option>
+            <Option value="Analysing">Analysing</Option>
+            <Option value="Completed">Completed</Option>
+        </Select>
+      );
+
+    const DownloadText = ({ icon, text, href }) => (
+        <Space>
+            <Button type="primary" href={href[0]["response"]}>
+                {React.createElement(icon)}
+                {text}
+            </Button>
+        </Space>
+    );
+    
+    return (
+        <HistoryWrapper>
+            <List
+                pagination={{pageSize: 5}}
+                itemLayout="vertical"
+                dataSource={hist}
+                renderItem={item => (
+                <List.Item
+                actions={[
+                    <AnalyseStatus icon={StarOutlined} text={item} key="list-vertical-star-o" />,
+                    <DownloadText href={item.fileUrl} icon={CloudDownloadOutlined} text="Download" key="list-vertical-like-o" />,
+                  ]}>
+                    <List.Item.Meta
+                    title={item.title}
+                    description={item.require}
+                    />
+                </List.Item>
+                )}
+            />
+        </HistoryWrapper>
+    )
+
 }
 
-const mapState = (state) => ({
-    list: state.get('history').get('historyList')
-});
-
-const mapDispatch = (dispatch) => ({
-    changeHistoryData(action){
-        dispatch(action);
-    }
-});
-
-export default connect(mapState, mapDispatch) (History);

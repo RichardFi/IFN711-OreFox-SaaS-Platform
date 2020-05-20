@@ -1,79 +1,86 @@
-import React, { Component } from 'react';
-import { ProfileWrapper, ProfileBox } from './style';
-import { Form, Input, Button } from 'antd';
+import React from 'react';
+import { ProfileWrapper } from './style';
+import { Form, Input, Button, message } from 'antd';
+import storageUtils from '../../utils/storageUtils';
 //import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-class Profile extends Component {
-    render(){
-        //const { loginStatus } = this.props;
-        const onFinish = values => {
-            alert("Success!");
-          };
-          const onFinishFailed = errorInfo => {
-            console.log('Failed:', errorInfo);
-          };
+export default function Profile() {
+    const userProfile = storageUtils.getUser()
+    const formItemLayout = {
+        labelCol: { span: 8 },
+        wrapperCol: { span: 7 },
+    };
 
-        return(
-            <ProfileWrapper>
-                <ProfileBox>
-                <Form
-                            name="normal_login"
-                            className="login-form"
-                            initialValues={{ remember: true }}
-                            onFinish={onFinish}
-                            onFinishFailed={onFinishFailed}
-                        >
+    //const { loginStatus } = this.props;
+    const onFinish = values => {
+        fetch("/profileUpdate", {
+            method: 'POST', // or 'PUT'
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(values),
+          })
+        .then(res => res.json())
+        .then(res => storageUtils.saveUser(res.data))
+        .then(message.success(`Profile update saved!`))
+        .catch(e => message.error(`Error`))
+    };
 
-                            <Form.Item
-                                label="Username"
-                                name="username"
-                            >
-                                <Input
-                                defaultValue="user_test"
-                                placeholder="Username" />
-                            </Form.Item>
+    return (
+        <ProfileWrapper>
+            <Form
+                name="profile"
+                {...formItemLayout}
+                onFinish={onFinish}
+                style={{ margin: "50px 0" }}
+            >
 
-                            <Form.Item
-                                label="First Name"
-                                name="First Name"
-                            >
-                                <Input
-                                defaultValue="Yongrui"
-                                placeholder="First Name" />
-                            
-                            </Form.Item>
+                <Form.Item
+                    label="Username"
+                    name="username"
+                    initialValue={userProfile["username"]}
+                    
+                >
+                    <Input
+                        placeholder="Username" />
+                </Form.Item>
 
-                            <Form.Item
-                                label="Last Name"
-                                name="Last Name"
-                            >
-                                <Input
-                                defaultValue="Pan"
-                                placeholder="Last Name" />
-                            
-                            </Form.Item>
+                <Form.Item
+                    label="First Name"
+                    name="firstName"
+                    initialValue={userProfile["firstName"]}
+                >
+                    <Input
+                        placeholder="First Name" />
 
-                            <Form.Item
-                                label="Email"
-                                name="Email"
-                            >
-                                <Input
-                                defaultValue="xxx@gmail.com"
-                                placeholder="Email" />
-                            
-                            </Form.Item>
+                </Form.Item>
 
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" className="login-form-button" 
-                                block="true">
-                                    Update
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                </ProfileBox>
-            </ProfileWrapper>
-        )
-    }
+                <Form.Item
+                    label="Last Name"
+                    name="lastName"
+                    initialValue={userProfile["lastName"]}
+                >
+                    <Input
+                        placeholder="Last Name" />
+
+                </Form.Item>
+
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    initialValue={userProfile["email"]}
+                >
+                    <Input
+                        placeholder="Email" />
+
+                </Form.Item>
+
+                <Form.Item wrapperCol={{ span: 12, offset: 14 }}>
+                    <Button type="primary" htmlType="submit">
+                        Update
+                    </Button>
+                </Form.Item>
+            </Form>
+        </ProfileWrapper>
+    )
 }
-
-export default Profile;

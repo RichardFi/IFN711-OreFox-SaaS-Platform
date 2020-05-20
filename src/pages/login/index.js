@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { LoginWrapper, LoginBox, LoginHeader } from './style';
+import { LoginWrapper, LoginBox, LoginHeader, Logo } from './style';
 import { actionCreators } from './store';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -41,7 +41,9 @@ class Login extends Component {
             return(
                 <LoginWrapper>
                     <LoginBox>
-                        <LoginHeader>Login</LoginHeader>
+                        <LoginHeader>
+                            <Logo href='/'></Logo>
+                        </LoginHeader>
                         <Form
                             name="normal_login"
                             className="login-form"
