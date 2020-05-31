@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { HeaderWrap, HeaderTop, HeaderBottom, HeaderBottomLeft, HeaderBottomRight } from './style';
 import { Modal } from 'antd';
 import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
+//import moment from 'moment';
 //import { useLocation, 
-    //useHistory, useRouteMatch 
+//useHistory, useRouteMatch 
 //} from "react-router";
+import { useHistory } from "react-router-dom";
 
-class BackHeader extends Component {
-    logout(){
+function BackHeader() {
+    const history = useHistory()
+
+    const logout = () => {
         Modal.confirm({
             content: 'Do you want to logout?',
-            onOk(){
+            onOk() {
                 storageUtils.removeUser();
-                memoryUtils.user ={};
-                
+                memoryUtils.user = {};
+                history.push("/history")
             }
         })
     }
 
-    render(){
-        //const title = getTitle();
-        return(
-            <HeaderWrap>
-                <HeaderTop>
-                    <span>Welcome, {storageUtils.getUser().username}</span>
-                    <a href="javacript:" onClick={this.logout}>Logout</a>
-                </HeaderTop>
-                <HeaderBottom>
-                    <HeaderBottomLeft>
-                        
-                    </HeaderBottomLeft>
-                    <HeaderBottomRight>
-                        <span></span>
-                    </HeaderBottomRight>
-                </HeaderBottom>
-            </HeaderWrap>
-        )
-    }
+    //const title = getTitle();
+    return (
+        <HeaderWrap>
+            <HeaderTop>
+                <span>Welcome, {storageUtils.getUser().username}</span>
+                <a href="javacript:" onClick={logout}>Logout</a>
+            </HeaderTop>
+            <HeaderBottom>
+                <HeaderBottomLeft>
+
+                </HeaderBottomLeft>
+                <HeaderBottomRight>
+                </HeaderBottomRight>
+            </HeaderBottom>
+        </HeaderWrap>
+    )
+
 }
 
 export default BackHeader;

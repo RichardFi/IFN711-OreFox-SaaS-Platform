@@ -10,6 +10,7 @@ import Support from '../support';
 import Upload from '../upload';
 import Payment from '../payment';
 import MainHome from '../mainHome';
+import Graphs from '../graphs';
 
 const { Footer, Sider, Content } = Layout;
 
@@ -36,6 +37,7 @@ class homeBack extends Component {
                             <Route path='/upload' component={Upload}></Route>
                             <Route path='/history' component={History}></Route>
                             <Route path='/support' component={Support}></Route>
+                            <Route path='/graphs' component={Graphs}></Route>
                             <Redirect to="/mainHome" />
                         </Switch>
                     </Content>

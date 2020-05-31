@@ -6,13 +6,20 @@ import { UploadOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
 export default function Upload() {
+    let fList = []
     //const [fileList, setFileList] = useState();
     function beforeUpload(file) {
         const isType = file.type === 'application/vnd.ms-excel' || file.type === 'application/json' || file.type === 'application/x-zip-compressed';
         if (!isType) {
           message.error('You can only upload csv/json/zip files!');
         }
-        return isType;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = e => {
+            file.thumbUrl = e.target.result;
+        }
+        fList.push(file)
+        return false;
     }
 
     const history = useHistory()
@@ -25,19 +32,6 @@ export default function Upload() {
         headers: {
             authorization: 'authorization-text',
         },
-        
-    
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        }
-        
     };
 
     const formItemLayout = {
@@ -52,17 +46,20 @@ export default function Upload() {
       };
 
     const onFinish = values => {
+        values.newFile = fList
         fetch("/requirements", {
             method: 'POST', 
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify(values)
+            body: JSON.stringify(values),
+            file: 'xx'
           })
         .then(res => res.json())
         .then(res => message.success(`${res.data.title} file uploaded successfully`))
-        .catch(e => message.error(`file uploaded failed`))
-        history.push("/home")
+        .then(history.push("/home"))
+        .catch(e => message.error(`File uploaded failed, empty file`))
+        
     };
     
     return (

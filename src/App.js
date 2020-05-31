@@ -3,8 +3,9 @@ import { BrowserRouter, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 //import Header from './common/header'
 //import Footer from './common/footer';
-import Home from './pages/home';
+//import Home from './pages/home';
 import Login from './pages/login';
+//import Register from './pages/register';
 import HomeBack from './pages/homeBack';
 import { GlobalStyle } from './style.js';
 import { IconFont } from './statics/iconfont/iconfont.js';
@@ -17,7 +18,6 @@ class App extends Component{
         <GlobalStyle />
         <IconFont />
         <BrowserRouter>
-          <Route path='/marketing' component={Home}></Route>
           <Route path='/login' exact component={Login}></Route>
           <Route path='/' component={HomeBack}></Route>
         </BrowserRouter>

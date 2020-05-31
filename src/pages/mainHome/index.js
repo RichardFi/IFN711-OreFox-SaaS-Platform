@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { HomeWrapper } from './style';
 
 
 class mainHome extends Component {
     render(){
         return(
-            <div>
+            <HomeWrapper>
                 Welcome to OreFox Platform!
-            </div>
+            </HomeWrapper>
         )
     }
 }

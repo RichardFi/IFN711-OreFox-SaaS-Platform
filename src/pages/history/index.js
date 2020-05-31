@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { HistoryWrapper } from './style';
 import { message, List, Space, Select, Button} from 'antd';
-import { CloudDownloadOutlined, StarOutlined } from '@ant-design/icons';
+import { CloudDownloadOutlined, StarOutlined, FieldTimeOutlined } from '@ant-design/icons';
 import storageUtils from '../../utils/storageUtils';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+
 
 const { Option } = Select;
 
@@ -14,13 +17,14 @@ export default function History() {
         fetch("/getHistory", {method: 'POST' })
         .then(res => res.json())
         .then(res => setHist(res.data))
+        //.then(res=> console.log(res))
         .catch(e => message.error(`Error`))        
     },[])
 
-    const AnalyseStatus = ({ icon, text, href }) => (
-        !(storageUtils.getUser().type==="admin") ? <Space style={{ width: 140 }}>{React.createElement(icon)}{text.status}</Space>:     
+    const AnalyseStatus = ({ icon, item }) => (
+        !(storageUtils.getUser().type==="admin") ? <Space>{React.createElement(icon)}{item.status}</Space>:
         <Select 
-            defaultValue={text.status} 
+            defaultValue={item.status} 
             style={{ width: 140 }} 
             onChange={(value)=>{
                 fetch("/updateStatus", {
@@ -28,7 +32,7 @@ export default function History() {
                     headers: new Headers({
                         'Content-Type': 'application/json'
                     }),
-                    body: JSON.stringify({value:value,requirement:text._id}),
+                    body: JSON.stringify({value:value,requirement:item._id}),
                     })
                     .then(message.success(`Requirement status update saved!`))
                     .catch(e => message.error(`Error`))
@@ -43,13 +47,37 @@ export default function History() {
 
     const DownloadText = ({ icon, text, href }) => (
         <Space>
-            <Button type="primary" href={href[0]["response"]}>
+            <Button type="primary" href={href[0]}>
                 {React.createElement(icon)}
                 {text}
             </Button>
         </Space>
     );
-    
+
+    const DataVis = ({ icon, text, item }) => (
+        !(item.status==="Completed") ?         
+        <Space>            
+            {"Waiting for results"}
+        </Space>:
+        <Space>
+            <Button type="primary">
+                <Link to='/graphs'>
+                    {React.createElement(icon)}
+                    {text}
+                </Link>
+            </Button>
+        </Space>
+    );
+
+    const LatestChange = ({ icon, item }) => (
+        <Space>
+            {React.createElement(icon)}
+                {
+                    moment(item.dateModified).format('LLL')
+                }
+        </Space>
+    );
+
     return (
         <HistoryWrapper>
             <List
@@ -59,12 +87,14 @@ export default function History() {
                 renderItem={item => (
                 <List.Item
                 actions={[
-                    <AnalyseStatus icon={StarOutlined} text={item} key="list-vertical-star-o" />,
+                    <AnalyseStatus icon={StarOutlined} item={item} key="list-vertical-star-o" />,
                     <DownloadText href={item.fileUrl} icon={CloudDownloadOutlined} text="Download" key="list-vertical-like-o" />,
+                    <DataVis icon={CloudDownloadOutlined} text="Visual Results" item={item} key="list-vertical-like-o" />,
+                    <LatestChange icon={FieldTimeOutlined} text="Date modified:" item={item} key="list-vertical-like-o" />,
                   ]}>
                     <List.Item.Meta
-                    title={item.title}
-                    description={item.require}
+                        title={item.title}
+                        description={item.require}
                     />
                 </List.Item>
                 )}

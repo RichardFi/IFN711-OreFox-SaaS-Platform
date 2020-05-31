@@ -17,8 +17,7 @@ export const login = (user) => {
     return async dispatch => {
         const response = await reqLogin(user);
         const result = response.data;
-        console.log('11', user);
-        console.log(result);
+
         if (result.code===0){
             const user = result.data;
             memoryUtils.user = user;
