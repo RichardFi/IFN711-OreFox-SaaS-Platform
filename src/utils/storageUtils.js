@@ -1,5 +1,9 @@
 import store from 'store';
 const USER_KEY = 'user_key';
+
+/*
+Save, get and remover user key locally.
+*/
 export default {
     saveUser (user){
         //localStorage.setItem(USER_KEY, JSON.stringify(user));

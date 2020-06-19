@@ -7,6 +7,9 @@ import { useHistory } from "react-router-dom";
 //import { UserOutlined, LockOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
+/*
+Support page
+*/
 export default function Support() {
     const userProfile = storageUtils.getUser()
     const history = useHistory()

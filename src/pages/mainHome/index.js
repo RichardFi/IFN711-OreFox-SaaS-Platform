@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { HomeWrapper } from './style';
+import storageUtils from '../../utils/storageUtils';
 
-
-class mainHome extends Component {
-    render(){
-        return(
-            <HomeWrapper>
-                Welcome to OreFox Platform!
-            </HomeWrapper>
-        )
-    }
+/*
+home page
+*/
+export default function MainHome() {
+    return (
+        <HomeWrapper>
+            Welcome to OreFox Platform, {storageUtils.getUser().username}.
+        </HomeWrapper>
+    )
 }
-
-export default mainHome;

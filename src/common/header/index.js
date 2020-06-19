@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 //import { constants } from '../../pages/login/store';
 import { actionCreators as loginActionCreators } from '../../pages/login/store';
 
+/*
+codes of old home page header, abandoned
+*/
 class Header extends Component{
     render() {
         const {login, logout} = this.props;

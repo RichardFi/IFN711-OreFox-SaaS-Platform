@@ -25,7 +25,7 @@ export const login = (user) => {
 
             dispatch(changeLogin());
         }else {
-            alert('fail');
+            alert('Wrong username or password, please try again');
         }
     }
 }

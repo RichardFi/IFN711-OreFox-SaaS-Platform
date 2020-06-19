@@ -3,12 +3,11 @@ import { HeaderWrap, HeaderTop, HeaderBottom, HeaderBottomLeft, HeaderBottomRigh
 import { Modal } from 'antd';
 import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
-//import moment from 'moment';
-//import { useLocation, 
-//useHistory, useRouteMatch 
-//} from "react-router";
 import { useHistory } from "react-router-dom";
 
+/*
+ the header of the home page
+ */
 function BackHeader() {
     const history = useHistory()
 

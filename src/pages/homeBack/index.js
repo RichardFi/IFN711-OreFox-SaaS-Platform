@@ -11,15 +11,22 @@ import Upload from '../upload';
 import Payment from '../payment';
 import MainHome from '../mainHome';
 import Graphs from '../graphs';
+//import Register from '../register';
+//import Login from '../login'
 
 const { Footer, Sider, Content } = Layout;
 
+/*
+codes of layout
+*/
 class homeBack extends Component {
     render(){
         const user = memoryUtils.user;
+        // redirect to login if the user did not login
         if(!user || !user._id){
             return <Redirect to='/login'/>
         }
+
         return(
             <div>
             <Layout style={{minHeight: '100vh'}}>

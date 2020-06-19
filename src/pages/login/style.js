@@ -16,20 +16,19 @@ export const LoginWrapper = styled.div`
     right: 0;
     top: 0;
     bottom: 0;
-    background: #e0672f;
+    background: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg)
 `
 
 export const LoginBox = styled.div`
     width: 420px;
     height: 320px;
     margin: auto;
-    margin-top: 28vh;
+    margin-top: 15vh;
     padding-top: 20px;
     background #fff;
-    box-shadow: 0 0 8px rgba(0,0,0,.1);
     .login-form{
         .ant-form-item{
-            padding: 0 40px;
+            padding-top: 10px;
         }
     }
 `

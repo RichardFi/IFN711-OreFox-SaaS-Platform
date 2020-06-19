@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { HistoryWrapper } from './style';
-import { message, List, Space, Select, Button} from 'antd';
-import { CloudDownloadOutlined, StarOutlined, FieldTimeOutlined } from '@ant-design/icons';
+import { message, List, Space, Select, Button, Upload} from 'antd';
+import { CloudDownloadOutlined, StarOutlined, FieldTimeOutlined, UploadOutlined } from '@ant-design/icons';
 import storageUtils from '../../utils/storageUtils';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 
 const { Option } = Select;
-
+/*
+Analysis History page
+*/
 export default function History() {
     const [hist, setHist] =useState([]);
 
     useEffect(
+        // fetch all history data from the end-point
         () => {
         fetch("/getHistory", {method: 'POST' })
         .then(res => res.json())
         .then(res => setHist(res.data))
-        //.then(res=> console.log(res))
         .catch(e => message.error(`Error`))        
     },[])
 
+    // Show and modify status component
     const AnalyseStatus = ({ icon, item }) => (
         !(storageUtils.getUser().type==="admin") ? <Space>{React.createElement(icon)}{item.status}</Space>:
         <Select 
@@ -44,7 +47,8 @@ export default function History() {
             <Option value="Completed">Completed</Option>
         </Select>
       );
-
+    
+    // download uploaded data component
     const DownloadText = ({ icon, text, href }) => (
         <Space>
             <Button type="primary" href={href[0]}>
@@ -53,12 +57,23 @@ export default function History() {
             </Button>
         </Space>
     );
+    
+    // show upload result
+    const onUpload =(info)=>{
+        if (info.file.status === 'done') {
+            message.success(`${info.file.name} report uploaded successfully, clients can view the report now.`);
+          } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+          }
+    }
 
+    // Show visualize result button for client account and show upload button to admin account when the analysis complete
     const DataVis = ({ icon, text, item }) => (
         !(item.status==="Completed") ?         
         <Space>            
             {"Waiting for results"}
         </Space>:
+        !(storageUtils.getUser().type==="admin") ?
         <Space>
             <Button type="primary">
                 <Link to='/graphs'>
@@ -66,9 +81,22 @@ export default function History() {
                     {text}
                 </Link>
             </Button>
+            <Button type="primary">
+                <a target="_blank" rel="noopener noreferrer" href={'https://storage.googleapis.com/ifn711saas/'+ storageUtils.getUser()._id+ '/' + item._id + '/report.pdf'}>Download Full Report</a>
+            </Button>
+        </Space>
+        :
+        <Space>
+            <Upload name= 'file' showUploadList={false} action= '/uploadReport' data={()=>item} headers= {{authorization: 'authorization-text'}} 
+            onChange={onUpload}>
+                
+                <Button>
+                <UploadOutlined /> Click to Upload Report
+                </Button>
+            </Upload>
         </Space>
     );
-
+    // show latest modified date and time
     const LatestChange = ({ icon, item }) => (
         <Space>
             {React.createElement(icon)}

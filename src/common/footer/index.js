@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { FooterWrapper, FooterNav, FooterLeft, FooterRight, NavItemLeft, NavItemRight } from './style';
+
+/*
+codes of old home page footer, abandoned
+*/
 class Footer extends Component{
     render() {        
         if(this.props.history.location.pathname==='/' || 

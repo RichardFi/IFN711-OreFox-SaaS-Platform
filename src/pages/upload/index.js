@@ -5,6 +5,9 @@ import { UploadOutlined } from '@ant-design/icons';
 //import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
+/*
+Upload page
+*/
 export default function Upload() {
     let fList = []
     //const [fileList, setFileList] = useState();

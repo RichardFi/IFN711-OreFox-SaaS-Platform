@@ -16,6 +16,9 @@ import {
 
 const SubMenu = Menu.SubMenu;
 
+/*
+left navigation bar of the layout
+*/
 class LeftNav extends Component {
     state = {
         collapsed: false,

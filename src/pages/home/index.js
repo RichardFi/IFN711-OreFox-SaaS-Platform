@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { HomeWrapper, HomeTop, HomeTopic, Portals, PortalsTxt, PortalsButton } from './style';
 
+/*
+codes of old home page, abandoned
+*/
 class Home extends Component {
     render(){
         return(

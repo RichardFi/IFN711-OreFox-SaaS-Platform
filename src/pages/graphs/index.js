@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { AgGridReact } from "ag-grid-react/lib/agGridReact";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgChartsReact } from 'ag-charts-react';
-import * as agCharts from 'ag-charts-community';
-import { Input, Button, Form, Select, Row, Col } from 'antd';
+import { Form, Select, Row, Col } from 'antd';
 import demo from '../../statics/demo.jpg';
 
 const { Option } = Select;
 
+/*
+codes of visual result page
+*/
 export default function Graphs() {
     const [rowData, setRowData] = useState([]);
     const [element, setElement] = useState('');
@@ -21,7 +22,6 @@ export default function Graphs() {
         { headerName: "Ag", field: "Ag" },
         { headerName: "Au", field: "Au" },
         { headerName: "Cu", field: "Cu" },
-
     ];
 
     useEffect(
@@ -42,7 +42,7 @@ export default function Graphs() {
                 )
                 .then(elements => setRowData(elements));
         }, [])
-    //Object.keys(res.data[0]))
+
     const options = {
         data: rowData,
         height: 500,
@@ -109,11 +109,6 @@ export default function Graphs() {
                                 <Option value="Cu">Cu</Option>
 
                             </Select>
-                        </Form.Item>
-                        <Form.Item wrapperCol={{ span: 12, offset: 15 }}>
-                            <Button type="primary" >
-                                <a target="_blank" rel="noopener noreferrer" href='https://storage.googleapis.com/ifn711saas/5ebaa6c1f2967f60d097d7b0/AnalysisReport.pdf'>View Full Report</a>
-                            </Button>
                         </Form.Item>
                     </Form>
                     <AgChartsReact options={options} />

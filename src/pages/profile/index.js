@@ -4,6 +4,9 @@ import { Form, Input, Button, message } from 'antd';
 import storageUtils from '../../utils/storageUtils';
 //import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+/*
+User profile page
+*/
 export default function Profile() {
     const userProfile = storageUtils.getUser()
     const formItemLayout = {

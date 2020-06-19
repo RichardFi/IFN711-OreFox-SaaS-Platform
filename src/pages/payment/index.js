@@ -2,14 +2,15 @@ import React from 'react';
 import { SupportWrapper } from './style';
 import { Form, Input, Button, message, Typography } from 'antd';
 import storageUtils from '../../utils/storageUtils';
-import { useHistory } from "react-router-dom";
 
 //import { UserOutlined, LockOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
+/*
+Make payment page
+*/
 export default function Payment() {
     const userProfile = storageUtils.getUser()
-    const history = useHistory()
 
     const formItemLayout = {
         labelCol: { span: 8 },
@@ -18,14 +19,23 @@ export default function Payment() {
 
     //const { loginStatus } = this.props;
     const onFinish = values => {
-        message.success('Billing details saved successfully')
-        history.push("/home")
+        fetch("/paymentUpdate", {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(values),
+          })
+        .then(res => res.json())
+        .then(res => storageUtils.saveUser(res.data))
+        .then(message.success(`Payment details updated`))
+        .catch(e => message.error(`Error`))
     };
 
     return (
         <SupportWrapper>
             <Form
-                name="profile"
+                name="payment"
                 {...formItemLayout}
                 onFinish={onFinish}
                 style={{ margin: "50px 0" }}
@@ -36,7 +46,7 @@ export default function Payment() {
                 <Form.Item
                     label="Card Number"
                     name="card"
-                    initialValue={5217290000000000}
+                    initialValue={userProfile["cardNumber"]}
                     type="password"
                 >
                     <Input.Password
@@ -46,7 +56,7 @@ export default function Payment() {
                 <Form.Item
                     label="Name"
                     name="name"
-                    initialValue={'Yongrui Pan'}
+                    initialValue={userProfile["cardHolderName"]}
                 >
                    <Input />
 
@@ -55,7 +65,7 @@ export default function Payment() {
                 <Form.Item
                     label="Expires"
                     name="expires"
-                    initialValue={'1/23'}
+                    initialValue={userProfile["expires"]}
                 >
                    <Input />
 
