@@ -11,7 +11,7 @@
     "ag-grid-community": "^23.1.1",
     "ag-grid-react": "^23.1.1",
     "antd": "^4.2.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "blueimp-md5": "^2.13.0",
     "immutable": "^4.0.0-rc.12",
     "mongoose": "^5.9.10",
